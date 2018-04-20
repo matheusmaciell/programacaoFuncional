@@ -1,39 +1,59 @@
 {-
 - Encontra o ultimo elemento de uma lista. Caso a lista seja vazia retorne o seguinte comando: error "Lista vazia!" 
 -}
-meuLast xs = undefined
+
+meuLast [] = error "Lista vazia!" 
+meuLast (x:y) =  last y
 
 {-
 - Encontra o penultimo elemento de uma lista. Caso a lista seja vazia ou tenha apenas um elemento retorne o seguinte comando: error "Lista sem penultimo" 
 -}
-penultimo xs = undefined
+penultimoA [] = print "fim"
+penultimoA (x:y) = do 
+					penultimo x
+					penultimoA y
+
+
+penultimo x =  print x
 
 {-
 - Retorna o k-esimo (k varia de 1 ate N) elemento de uma lista. Ex: elementAt 2 [4,7,1,9] = 7
 -}
-elementAt i xs = undefined
+elementAt 1 (x:xs) = x
+elementAt i (x:xs) = elementAt (i-1) xs
 
 {-
 - Retorna o tamanho de uma lista. 
 -}
-meuLength xs = undefined
+
+meuLength [] = 0
+meuLength (x:xs) =  1 + meuLength xs
 
 {-
 - Retorna o inverso de uma lista. 
 -}
-meuReverso xs = undefined
+
+meuReverso [] = []
+meuReverso (x:xs) = (meuReverso xs) ++ [x]
 
 {-
 - Diz se uma lista é palindrome. 
 -}
-isPalindrome xs = undefined
+
+isPalindrome [] = False
+isPalindrome xs
+			|meuReverso xs == xs = True
+			|otherwise = False
 
 {-
 - Remove os elementos duplicados de uma lista. Ex: compress [2,5,8,2,1,8] = [2,5,8,1]
 - Voce pode usar a funcao elem de Haskell
 -}
-compress xs = undefined
 
+compress [] = []
+compress (x:xs) 
+			| x `elem` xs = compress xs
+			| otherwise = [x] ++ compress xs
 {-
 - Varre a lista da esquerda para a direita e junta os elementos iguais. Ex: compact [2,5,8,2,1,8] = [2,2,5,8,8,1]
 - Voce pode usar funcoes sobre listas como : (cons), filter, etc.
@@ -56,8 +76,10 @@ split xs i = undefined
 - Extrai um pedaço (slice) de uma lista especificado por um intervalo. 
 - Ex: slice [3,6,1,9,4] 2 4 = [6,1,9]
 -}
-slice xs imin imax = undefined
 
+slice _ 0 0 = []
+slice (x:xs) 0 imax = [x] ++ slice xs 0 (imax -1) 
+slice xs imin imax = slice xs (imin -1) (imax -1)
 {-
 - Insere um elemento em uma posicao especifica de uma lista. 
 - Ex: insertAt 7 4 [3,6,1,9,4] = [3,6,1,7,9,4]
@@ -105,3 +127,14 @@ mean xs = undefined
 - Escreva a funcao myAppend que faz o append de uma lista xs com a lista ys, usando a função foldr. 
 -}
 myAppend xs ys = undefined
+
+
+
+
+main:: IO()
+main = do
+	
+	let a = slice [1,2,3,4,5,6] 4 6
+	penultimoA a
+	print "a"
+	
