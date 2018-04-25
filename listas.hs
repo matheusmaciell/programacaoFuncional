@@ -76,7 +76,7 @@ split xs i = undefined
 - Extrai um pedaço (slice) de uma lista especificado por um intervalo. 
 - Ex: slice [3,6,1,9,4] 2 4 = [6,1,9]
 -}
-
+     --- ainda ta errado
 slice _ 0 0 = []
 slice (x:xs) 0 imax = [x] ++ slice xs 0 (imax -1) 
 slice xs imin imax = slice xs (imin -1) (imax -1)
@@ -84,6 +84,7 @@ slice xs imin imax = slice xs (imin -1) (imax -1)
 - Insere um elemento em uma posicao especifica de uma lista. 
 - Ex: insertAt 7 4 [3,6,1,9,4] = [3,6,1,7,9,4]
 -}
+
 insertAt el pos xs = undefined
 
 {-
@@ -104,29 +105,32 @@ sort xs = x:ys
 {-
 - Calcula a soma de todos os elementos de uma lista usando foldr.
 -}
-mySum xs = undefined
+mySum (x:xs) = foldr (+) x xs
 
 {-
 - Dada a funcao max que retorna o maximo entre dois numeros, escreva uma funcao que usa a função
 - foldr e max para retornar o maximo de uma lista se a lista não é vazia.
 -}
-maxList xs = undefined
+maxList (x:xs) = foldr max x xs 
 
 {-
 - Transforma uma string em uma palindrome acrescentando o reverso da string ao seu final sem usar a funcao reverse. 
 - Ex: buildPalindrome [1,2,3] = [1,2,3,3,2,1]. 
 -}
-buildPalindrome xs = undefined
+buildPalindrome xs = xs ++ meuReverso xs
 
 {-
 - Computa a media dos elementos de uma lista de numeros, sem usar nenhuma funcao pronta de listas.
 -}
-mean xs = undefined
+mean xs = mySum xs / meuLength xs
 
 {-
 - Escreva a funcao myAppend que faz o append de uma lista xs com a lista ys, usando a função foldr. 
 -}
-myAppend xs ys = undefined
+
+
+--- falta usar a funcao foldr
+myAppend xs ys =  xs ++ ys
 
 
 
@@ -134,7 +138,8 @@ myAppend xs ys = undefined
 main:: IO()
 main = do
 	
-	let a = slice [1,2,3,4,5,6] 4 6
+	let a = slice [1,2,3,4,5,6] 2 6
 	penultimoA a
 	print "a"
+	
 	
