@@ -51,26 +51,30 @@ isPalindrome xs
 -}
 
 compress [] = []
-compress (x:xs) 
-			| x `elem` xs = compress xs
-			| otherwise = [x] ++ compress xs
+compress (x:xs) = [x] ++ compress (filter (/=x) xs)
 {-
 - Varre a lista da esquerda para a direita e junta os elementos iguais. Ex: compact [2,5,8,2,1,8] = [2,2,5,8,8,1]
 - Voce pode usar funcoes sobre listas como : (cons), filter, etc.
 -}
-compact xs = undefined
+
+
+compact [] = []
+compact (x:xs) = [x] ++ filter (==x) xs ++ compact (filter (/=x) xs)
 
 
 {-
 - Retorna uma lista de pares com os elementos e suas quantidades. Ex: encode [2,2,2,3,4,2,5,2,4,5] = [(2,5),(3,1),(4,2),(5,2)]
 - Voce pode usar funcoes sobre listas como : (cons), filter, etc.
 -}
-encode xs = undefined
+encode [] = []
+encode (x:xs) = [(x,1 + meuLength (filter (==x) xs))] ++ encode (filter (/=x) xs)
 
 {-
 - Divide uma lista em duas sublistas onde o ponto de divisao é dado. Ex: split [3,6,1,9,4] 3 = [[3,6,1],[9,4]]
 -}
-split xs i = undefined
+
+
+split (x:xs) i = undefined
 
 {-
 - Extrai um pedaço (slice) de uma lista especificado por um intervalo. 
@@ -85,7 +89,8 @@ slice xs imin imax = slice xs (imin -1) (imax -1)
 - Ex: insertAt 7 4 [3,6,1,9,4] = [3,6,1,7,9,4]
 -}
 
-insertAt el pos xs = undefined
+insertAt el 1 xs = [el] ++ xs
+insertAt el pos (x:xs) =  [x] ++  insertAt el (pos-1) xs
 
 {-
 - Ordena uma lista em ordem crescente. Voce deve seguir a ideia do selectionsort onde os elementos 
@@ -130,7 +135,7 @@ mean xs = mySum xs / meuLength xs
 
 
 --- falta usar a funcao foldr
-myAppend xs ys =  xs ++ ys
+myAppend xs ys = foldr (++) xs ys
 
 
 
@@ -138,7 +143,7 @@ myAppend xs ys =  xs ++ ys
 main:: IO()
 main = do
 	
-	let a = slice [1,2,3,4,5,6] 2 6
+	let a = myAppend [2] [3,4,5]
 	penultimoA a
 	print "a"
 	
