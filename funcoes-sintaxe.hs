@@ -33,11 +33,11 @@ sumSquares x y = square x + square y
 higherOrderSum f a b = f a b
 
 -- Defina a soma dos quadrados em termos de higherOrderSum
-hoSumSquares = undefined
+hoSumSquares = higherOrderSum sumSquares a b
 
 --Implemente a funcao mapFilter que primeiro aplica o map de uma funcao f a uma lista e depois aplica a funcao filter
 -- a lista resultante. Procure usar a composicao de funcoes
-mapFilter f p xs = undefined
+mapFilter f p xs = let result = map f xs = [f x| x <- xs] in filter p result = [x | x <- xs, p x]
 
 
 main:: IO()
